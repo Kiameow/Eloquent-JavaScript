@@ -1,0 +1,46 @@
+<h1>Mountains</h1>
+
+<div id="mountains"></div>
+
+<script>
+  const MOUNTAINS = [
+    {name: "Kilimanjaro", height: 5895, place: "Tanzania"},
+    {name: "Everest", height: 8848, place: "Nepal"},
+    {name: "Mount Fuji", height: 3776, place: "Japan"},
+    {name: "Vaalserberg", height: 323, place: "Netherlands"},
+    {name: "Denali", height: 6168, place: "United States"},
+    {name: "Popocatepetl", height: 5465, place: "Mexico"},
+    {name: "Mont Blanc", height: 4808, place: "Italy/France"}
+  ];
+
+  // Your code here
+  function createElementWithText(type, text) {
+    if (typeof text === 'undefined') {
+      return document.createElement(type);
+    }
+    const res = document.createElement(type);
+    res.appendChild(document.createTextNode(text));
+    return res;
+  }
+
+  function generateTable(targetDiv, dataset) {
+    const table = document.createElement("table");
+    let tableRow = document.createElement("tr");
+    const keys = Object.keys(dataset[0]);
+    for (let key of keys) {
+      tableRow.appendChild(createElementWithText("th", key));
+    }
+    table.appendChild(tableRow);
+    
+    for (let dataObj of dataset) {
+      tableRow = document.createElement("tr");
+      for (let key in dataObj) {
+        tableRow.appendChild(createElementWithText("td", dataObj[key]))
+      }
+      table.appendChild(tableRow);
+    }
+    targetDiv.appendChild(table);
+  }
+  const moutainsDiv = document.getElementById('mountains');
+  generateTable(moutainsDiv, MOUNTAINS);
+</script>
