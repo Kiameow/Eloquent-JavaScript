@@ -24,20 +24,26 @@
     tabOne.style.display = "contents";
     node.insertBefore(btn_section, tabOne);
 
+    let prevTab = tabs[0];
     node.addEventListener("click", event => {
       let target = event.target;
       let btname = target.getAttribute("data-btname");
       if (btname) {
         for (let tab of tabs) {
-          tab.style.display = "none";
           if (tab.getAttribute("data-tabname") == btname) {
-            tab.style.display = "contents";
+            changeTab(prevTab, tab);
+            prevTab = tab;
           }
         }
       }
     }); 
 
-    
+    function changeTab(prevTab, newTab) {
+      prevTab.style.display = "none";
+      newTab.style.display = "contents";
+    }
+
+    changeTab(prevTab, tabs[0]);
   }
   asTabs(document.querySelector("tab-panel"));
 </script>
