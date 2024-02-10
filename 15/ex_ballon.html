@@ -1,0 +1,28 @@
+<p>🎈</p>
+
+<script>
+  // Your code here
+  const ballon = document.querySelector("p");
+  let ballonSize = 10;
+  const maxBallonSize = 20;
+  const minBallonSize = 10;
+  ballon.style.fontSize = 10 + "px";
+  function flateBallon(event) {
+    if (event.key == "ArrowUp") {
+      event.preventDefault();
+      ballonSize *= 1.1;
+      if (ballonSize > maxBallonSize) {
+        ballon.textContent = '💥';
+        window.removeEventListener("keydown", flateBallon);
+      }
+      ballon.style.fontSize = ballonSize + "px";
+    } else if (event.key == "ArrowDown") {
+      event.preventDefault();
+      ballonSize /= 1.1;
+      ballonSize = Math.max(minBallonSize, ballonSize);
+      ballon.style.fontSize = ballonSize + "px";
+    }
+  }
+
+  window.addEventListener("keydown", flateBallon);
+</script>

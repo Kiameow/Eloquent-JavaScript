@@ -1,0 +1,26 @@
+<style>
+  .trail { /* className for the trail elements */
+    position: absolute;
+    height: 6px; width: 6px;
+    border-radius: 3px;
+    background: teal;
+  }
+  body {
+    height: 300px;
+  }
+</style>
+
+<script>
+  // Your code here.
+  window.addEventListener("mousemove", event => {
+    let trail = document.createElement("div");
+    trail.className = "trail";
+    trail.style.left = event.clientX - 3 + "px";
+    trail.style.top = event.clientY - 3 + "px";
+    document.body.appendChild(trail);
+
+    setTimeout(() => {
+      trail.remove();
+    }, 100);
+  })
+</script>

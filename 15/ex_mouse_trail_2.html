@@ -1,0 +1,57 @@
+<style>
+  .element {
+    border-radius: 3px;
+    height: 6px; width: 6px;
+    background-color: blue;
+    position: absolute;
+  }
+</style>
+<div class="element"></div>
+
+<script>
+  // 获取需要被吸引的元素
+const element = document.querySelector('.element');
+
+// 定义元素的初始位置
+let elementX = 0;
+let elementY = 0;
+
+// 定义鼠标位置
+let mouseX = 0;
+let mouseY = 0;
+
+// 定义力度
+const force = 0.1;
+
+// 监听鼠标移动事件
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+// 更新元素位置
+function updateElementPosition() {
+  // 计算鼠标与元素的距离
+  const dx = mouseX - elementX;
+  const dy = mouseY - elementY;
+
+  // 计算力的大小
+  const ax = dx * force;
+  const ay = dy * force;
+
+  // 应用力到元素的速度
+  elementX += ax;
+  elementY += ay;
+
+  // 更新元素位置
+  element.style.left = elementX + 'px';
+  element.style.top = elementY + 'px';
+
+  // 请求下一帧动画
+  requestAnimationFrame(updateElementPosition);
+}
+
+// 启动动画
+updateElementPosition();
+
+</script>

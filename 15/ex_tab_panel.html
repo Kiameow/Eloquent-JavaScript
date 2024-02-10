@@ -1,0 +1,43 @@
+<tab-panel>
+  <div data-tabname="one">Tab one</div>
+  <div data-tabname="two">Tab two</div>
+  <div data-tabname="three">Tab three</div>
+</tab-panel>
+<script>
+  function asTabs(node) {
+    // Your code here.
+
+    const tabs = Array.from(node.children);
+    const btn_section = document.createElement("div");
+    for (let tab of tabs) {
+      tab.style.display = "none";
+      let btn = document.createElement("button");
+      let tabname = tab.getAttribute("data-tabname");
+      btn.textContent = tabname;
+      btn.setAttribute("data-btname", tabname);
+      btn_section.appendChild(btn);
+    }
+    let tabOne = node.firstChild;
+    while (tabOne.nodeType === Node.TEXT_NODE) {
+      tabOne = tabOne.nextSibling;
+    }
+    tabOne.style.display = "contents";
+    node.insertBefore(btn_section, tabOne);
+
+    node.addEventListener("click", event => {
+      let target = event.target;
+      let btname = target.getAttribute("data-btname");
+      if (btname) {
+        for (let tab of tabs) {
+          tab.style.display = "none";
+          if (tab.getAttribute("data-tabname") == btname) {
+            tab.style.display = "contents";
+          }
+        }
+      }
+    }); 
+
+    
+  }
+  asTabs(document.querySelector("tab-panel"));
+</script>
